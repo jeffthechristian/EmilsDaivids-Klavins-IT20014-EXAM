@@ -1,12 +1,12 @@
 import { reactive } from 'vue'
 
 export const auth = reactive({
-    name : Emils,
-    surname : Klavins,
-    code : IT20014,
-    favorite_songs : [],
-
-    user : {},
+    user : {
+        name : "Emils",
+        surname : "Klavins",
+        code : "IT20014",
+        favorite_songs : [],
+    },
     is_authenticated: localStorage.is_authenticated ?? false,
 
     setUserData(name, surname, code) {
