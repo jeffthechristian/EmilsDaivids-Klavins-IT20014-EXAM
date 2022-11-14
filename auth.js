@@ -17,7 +17,7 @@ export const auth = reactive({
     
     authenticate(email, password) {
         if (email == "emilsdaivids.klavins@va.lv" && password == "12345678") {
-           localStorage.is_authenticated ?? true;
+           localStorage.is_authenticated = true;
            this.is_authenticated = true;
            router.replace('/')
         }
@@ -25,7 +25,7 @@ export const auth = reactive({
     
     logout() {
         localStorage.clear();
-        localStorage.is_authenticated ?? false;
+        this.localStorage.is_authenticated = false;
         router.replace('/login')
     },
     
