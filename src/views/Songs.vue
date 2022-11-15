@@ -59,9 +59,7 @@ export default {
         <input v-model="search" id="input-search" placeholder="Search by title..." />
       </div>
       <div class="wrapper-settings">
-        <button id="btn-show-favorites" @click="setFavoriteBtn()" v-bind:class="{
-          active: show_favorites
-        }">Show Favorites</button>
+        <button id="btn-show-favorites" @click="setFavoriteBtn()" v-bind:class="{active: show_favorites}">Show Favorites</button>
       </div>
     </div>
     <div class="wrapper-songs">

@@ -8,9 +8,9 @@ export default {
             editGroup: false,
             aboutGroup: true,
 
-            changeName: "",
-            changeSurname: "",
-            changeCode: ""
+            changeName: auth.user.name,
+            changeSurname: auth.user.surname,
+            changeCode: auth.user.code
         }
     },
     methods: {
@@ -40,10 +40,8 @@ export default {
         <div class="wrapper-header">
             <h1>ABOUT ME</h1>
             <div class="settings">
-                <div v-if="aboutGroup"><button id="btn-show-favorites" @click="setEditStuff()" v-bind:class="{
-                }">Edit Form</button></div>
-                <div v-if="editGroup"><button id="btn-show-favorites" @click="setCancelStuff()" v-bind:class="{
-                }">Cancel</button></div>
+                <div v-if="aboutGroup"><button id="btn-show-favorites" @click="setEditStuff()" v-bind:class="{}">Edit Form</button></div>
+                <div v-if="editGroup"><button id="btn-show-favorites" @click="setCancelStuff()" v-bind:class="{active: editGroup}">Cancel</button></div>
                 <div v-if="editGroup"><button id="btn-save" @click="saveButtonStuff()" v-bind:class="{
                 }">Save Form</button></div>
             </div>
