@@ -61,8 +61,7 @@ export default {
       <div class="wrapper-settings">
         <button id="btn-show-favorites" @click="setFavoriteBtn()" v-bind:class="{
           active: show_favorites
-        }">Show
-          Favorites</button>
+        }">Show Favorites</button>
       </div>
     </div>
     <div class="wrapper-songs">
