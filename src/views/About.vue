@@ -8,6 +8,7 @@ export default {
             inputSurname: false,
             inputCode: false,
             saveButton: false,
+            cancelButton: false,
 
             currentName: true,
             currentSurname: true,
@@ -27,6 +28,7 @@ export default {
                 this.inputSurname = true;
                 this.inputCode = true;
                 this.saveButton = true;
+                this.cancelButton = true;
 
                 this.editButton = false;
                 this.currentName = false;
@@ -34,11 +36,24 @@ export default {
                 this.currentCode = false;
             }
         },
+        setCancelStuff() {
+            this.inputName = false;
+            this.inputSurname = false;
+            this.inputCode = false;
+            this.saveButton = false;
+            this.cancelButton = false;
+
+            this.currentName = true;
+            this.currentSurname = true;
+            this.currentCode = true;
+            this.editButton = true;
+        },
         saveButtonStuff() {
             this.inputName = false;
             this.inputSurname = false;
             this.inputCode = false;
             this.saveButton = false;
+            this.cancelButton = false;
 
             this.currentName = true;
             this.currentSurname = true;
@@ -60,6 +75,8 @@ export default {
             <div class="settings">
                 <div v-if="editButton"><button id="btn-show-favorites" @click="setEditStuff()" v-bind:class="{
                 }">Edit Form</button></div>
+                <div v-if="cancelButton"><button id="btn-show-favorites" @click="setCancelStuff()" v-bind:class="{
+                }">Cancel</button></div>
                 <div v-if="saveButton"><button id="btn-save" @click="saveButtonStuff()" v-bind:class="{
                 }">Save Form</button></div>
             </div>
