@@ -1,6 +1,7 @@
 <script>
-import songList from '../data/songs.js'
+import songList from '../data/songs'
 import IconHeart from '../components/icons/IconHeart.vue';
+
 export default {
   components: { IconHeart, },
   data() {
@@ -29,7 +30,17 @@ export default {
       return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     },
     getArtists(artists) {
-      return artists[0].name;
+      let x = '';
+      let length = Object.keys(artists).length;
+
+      artists.forEach((ar, index) => {
+        if (index != length - 1) {
+          x = x + ar.name + ", ";
+        } else {
+          x = x + ar.name;
+        }
+      });
+      return x;
     },
   },
   computed: {
@@ -78,8 +89,8 @@ export default {
             <img :src="song.album.images[1].url" />
             {{ song.name }}
           </td>
-          <td id="td-artist">{{ getArtists(song.artists) }}</td>
-          <td id="td-album">{{ song.album.name }}</td>
+          <td id="td-artist">{{getArtists(song.artists)}}</td>
+          <td id="td-album">{{ song.album.name}}</td>
           <td id="td-duration">
             {{ getTime(song.duration_ms) }}
             <IconHeart />
