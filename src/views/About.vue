@@ -4,16 +4,9 @@ export default {
     data() {
         return {
             auth,
-            inputName: false,
-            inputSurname: false,
-            inputCode: false,
-            saveButton: false,
-            cancelButton: false,
 
-            currentName: true,
-            currentSurname: true,
-            currentCode: true,
-            editButton: true,
+            editGroup: false,
+            aboutGroup: true,
 
             changeName: "",
             changeSurname: "",
@@ -21,44 +14,18 @@ export default {
         }
     },
     methods: {
-        //vismaz strādā :D
+        //Dienas beigās strādā, tākā viss ok :D
         setEditStuff() {
-            if (this.inputName == false && this.inputSurname == false && this.inputCode == false) {
-                this.inputName = true;
-                this.inputSurname = true;
-                this.inputCode = true;
-                this.saveButton = true;
-                this.cancelButton = true;
-
-                this.editButton = false;
-                this.currentName = false;
-                this.currentSurname = false;
-                this.currentCode = false;
-            }
+            this.editGroup = true;
+            this.aboutGroup = false;
         },
         setCancelStuff() {
-            this.inputName = false;
-            this.inputSurname = false;
-            this.inputCode = false;
-            this.saveButton = false;
-            this.cancelButton = false;
-
-            this.currentName = true;
-            this.currentSurname = true;
-            this.currentCode = true;
-            this.editButton = true;
+            this.editGroup = false;
+            this.aboutGroup = true;
         },
         saveButtonStuff() {
-            this.inputName = false;
-            this.inputSurname = false;
-            this.inputCode = false;
-            this.saveButton = false;
-            this.cancelButton = false;
-
-            this.currentName = true;
-            this.currentSurname = true;
-            this.currentCode = true;
-            this.editButton = true;
+            this.editGroup = false;
+            this.aboutGroup = true;
 
             this.auth.user.name = this.changeName;
             this.auth.user.surname = this.changeSurname;
@@ -73,29 +40,29 @@ export default {
         <div class="wrapper-header">
             <h1>ABOUT ME</h1>
             <div class="settings">
-                <div v-if="editButton"><button id="btn-show-favorites" @click="setEditStuff()" v-bind:class="{
+                <div v-if="aboutGroup"><button id="btn-show-favorites" @click="setEditStuff()" v-bind:class="{
                 }">Edit Form</button></div>
-                <div v-if="cancelButton"><button id="btn-show-favorites" @click="setCancelStuff()" v-bind:class="{
+                <div v-if="editGroup"><button id="btn-show-favorites" @click="setCancelStuff()" v-bind:class="{
                 }">Cancel</button></div>
-                <div v-if="saveButton"><button id="btn-save" @click="saveButtonStuff()" v-bind:class="{
+                <div v-if="editGroup"><button id="btn-save" @click="saveButtonStuff()" v-bind:class="{
                 }">Save Form</button></div>
             </div>
         </div>
         <form>
             <div class="wrapper-input">
                 <label>NAME</label>
-                <div v-if="inputName"><input v-model="changeName" id="input-name" /></div>
-                <div v-if="currentName"><p id="txt-name">{{auth.user.name}}</p></div>
+                <div v-if="editGroup"><input v-model="changeName" id="input-name" /></div>
+                <div v-if="aboutGroup"><p id="txt-name">{{auth.user.name}}</p></div>
             </div>
             <div class="wrapper-input">
                 <label>SURNAME</label>
-                <div v-if="inputSurname"><input v-model="changeSurname" id="input-surname" /></div>
-                <div v-if="currentSurname"><p id="txt-surname">{{auth.user.surname}}</p></div>
+                <div v-if="editGroup"><input v-model="changeSurname" id="input-surname" /></div>
+                <div v-if="aboutGroup"><p id="txt-surname">{{auth.user.surname}}</p></div>
             </div>
             <div class="wrapper-input">
                 <label>STUDENT CODE</label>
-                <div v-if="inputCode"><input v-model="changeCode" id="input-code" /></div>
-                <div v-if="currentCode"><p id="txt-code">{{auth.user.code}}</p></div>
+                <div v-if="editGroup"><input v-model="changeCode" id="input-code" /></div>
+                <div v-if="aboutGroup"><p id="txt-code">{{auth.user.code}}</p></div>
             </div>
             <div class="wrapper-songs">
                 <label>FAVORITE SONGS</label>
