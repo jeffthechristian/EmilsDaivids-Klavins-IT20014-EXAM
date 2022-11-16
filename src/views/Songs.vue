@@ -1,11 +1,12 @@
 <script>
 import songList from '../data/songs'
 import { player } from '../stores/player'
-import IconHeart from '../components/icons/IconHeart.vue'
+import IconHeart from '../components/icons/IconHeart.vue';
+import IconPlay from '../components/icons/IconPlay.vue';
 import { auth } from '/auth.js'
 
 export default {
-  components: { IconHeart, },
+  components: { IconHeart, IconPlay },
   data() {
     return {
       auth,
@@ -84,10 +85,10 @@ export default {
             <IconCaretUp />
           </th>
         </tr>
-        <tr class="song" v-for="(song, index) in filtered_songs" @dblclick="selectSong(song)">
+        <tr class="song" v-for="(song, index) in filtered_songs" @dblclick="selectSong(song)" v-bind:class="{active: song.id == player.getNowPlayingSongId()}">
           <td id="td-index">
-            <IconPlay />
-            <span id="txt-index">{{ index + 1 }}</span>
+            <IconPlay v-if="song.id == player.getNowPlayingSongId()" />
+            <span id="txt-index" v-if="song.id != player.getNowPlayingSongId()">{{ index + 1 }}</span>
           </td>
           <td id="td-title">
             <img :src="song.album.images[1].url" />
