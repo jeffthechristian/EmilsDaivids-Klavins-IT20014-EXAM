@@ -5,17 +5,18 @@ import songList from '../data/songs.js'
 export default {
   components: {IconGrid, IconList},
   methods: {
+    //no artist masīva saliek visus vienā stringā un atgriež (ja vairāki artisti pie vienas dziesmas, lai parādas)
     getArtists(artists) {
-      let temp = '';
-      let len = Object.keys(artists).length;
-      artists.forEach((art, index) => {
-        if (index != len - 1) {
-          temp = temp + art.name + ", ";
+      let x = '';
+      let length = Object.keys(artists).length;
+      artists.forEach((ar, index) => {
+        if (index != length - 1) {
+          x = x + ar.name + ", ";
         } else { 
-          temp = temp + art.name;
+          x = x + ar.name;
         }
       });
-      return temp;
+      return x;
     },
     getAlbumYear(date) {
       return date.split('-')[0];
@@ -31,13 +32,10 @@ export default {
     }
   },
   computed: {
+    //iterē cauri dziesmām un atgriež albūmus
     albums() {
       let albums = [];
       this.songs.forEach((song) => {
-        let obj = {
-          id: song.album,
-          songs: []
-        };
         if (albums.filter(e => e.id === song.album.id).length > 0 == false) {
           albums.push(song.album);
         }

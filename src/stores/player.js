@@ -7,13 +7,13 @@ export const player = reactive({
         this.playlist = songs;
     },
     setNowPlaying(song) {
-        this.now_playing = song; //varbut nav pareizi
+        this.now_playing = song;
     },
     getNowPlayingSongId() {
         return this.now_playing?.id;
     },
     getNowPlaying() {
-        return this.now_playing; //varbūt nav pareizi
+        return this.now_playing;
     },
     getNowPlayingAlbumID() {
         return this.now_playing?.album?.id ?? null;

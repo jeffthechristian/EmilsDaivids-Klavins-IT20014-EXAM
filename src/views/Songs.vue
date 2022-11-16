@@ -21,11 +21,14 @@ export default {
       this.$refs.header.classList.value = event.target.scrollTop > 100 ? 'scrolled' : '';
     },
     
+    //milisekundes pārveido minūtēs un sekundēs
     getTime(time_ms) {
       var minutes = Math.floor(time_ms / 60000);
       var seconds = ((time_ms % 60000) / 1000).toFixed(0);
       return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     },
+
+    //no artist masīva saliek visus vienā stringā un atgriež (ja vairāki artisti pie vienas dziesmas, lai parādas)
     getArtists(artists) {
       let x = '';
       let length = Object.keys(artists).length;
@@ -38,11 +41,15 @@ export default {
       });
       return x;
     },
+
+    //lai atskaņotu dziesmiņ
     selectSong(song) {
       player.setNowPlaying(song);
     }
   },
   computed: {
+
+    //search
     filtered_songs() {
       let son = this.songs;
       let x = [];
@@ -64,10 +71,7 @@ export default {
         <input v-model="search" id="input-search" placeholder="Search by title..." />
       </div>
       <div class="wrapper-settings">
-        <button id="btn-show-favorites" @click="show_favorites ? show_favorites = true : show_favorites = false" v-bind:class="{
-          active: show_favorites
-        }">Show
-          Favorites</button>
+        <button id="btn-show-favorites" @click="show_favorites ? show_favorites = true : show_favorites = false" v-bind:class="{ active: show_favorites }">Show Favorites</button>
       </div>
     </div>
     <div class="wrapper-songs">

@@ -19,7 +19,7 @@ export default {
         }
     },
     methods: {
-        //Dienas beigās strādā, tākā viss ok :D
+        //Dienas beigās strādā, tākā viss ok :D (kam kurā momentā rādīties)
         setEditStuff() {
             this.editGroup = true;
             this.aboutGroup = false;
@@ -34,6 +34,8 @@ export default {
 
             this.auth.setUserData(this.changeName, this.changeSurname, this.changeCode);
         },
+
+        //no artist masīva saliek visus vienā stringā un atgriež (ja vairāki artisti pie vienas dziesmas, lai parādas)
         getArtists(artists) {
             let x = '';
             let length = Object.keys(artists).length;
@@ -49,6 +51,7 @@ export default {
     },
   
     computed: {
+        //iterē cauri favorite songs masīvam un listo dziesmas, kuru id sakrīt ar favorite songs id.. yes
         favoriteSongs() {
             let favoriteSongs = [];
             let x = auth.getFavoriteSongs();
