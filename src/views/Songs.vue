@@ -1,7 +1,7 @@
 <script>
 import songList from '../data/songs'
 import { player } from '../stores/player'
-import IconHeart from '../components/icons/IconHeart.vue';
+import IconHeart from '../components/icons/IconHeart.vue'
 export default {
   components: { IconHeart, },
   data() {
