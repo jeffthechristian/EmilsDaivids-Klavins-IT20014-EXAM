@@ -1,11 +1,12 @@
 <script>
 import songList from '../data/songs'
+import { player } from '../stores/player'
 import IconHeart from '../components/icons/IconHeart.vue';
-
 export default {
   components: { IconHeart, },
   data() {
     return {
+      player,
       search: '',
       show_favorites: false,
       songs: songList,
@@ -17,13 +18,7 @@ export default {
     handleScroll(event) {
       this.$refs.header.classList.value = event.target.scrollTop > 100 ? 'scrolled' : '';
     },
-    setFavoriteBtn() {
-      if (this.show_favorites == false) {
-        this.show_favorites = true;
-      } else {
-        this.show_favorites = false;
-      }
-    },
+    
     getTime(time_ms) {
       var minutes = Math.floor(time_ms / 60000);
       var seconds = ((time_ms % 60000) / 1000).toFixed(0);
@@ -32,7 +27,6 @@ export default {
     getArtists(artists) {
       let x = '';
       let length = Object.keys(artists).length;
-
       artists.forEach((ar, index) => {
         if (index != length - 1) {
           x = x + ar.name + ", ";
@@ -42,6 +36,9 @@ export default {
       });
       return x;
     },
+    selectSong(song) {
+      player.setNowPlaying(song);
+    }
   },
   computed: {
     filtered_songs() {
@@ -59,7 +56,10 @@ export default {
         <input v-model="search" id="input-search" placeholder="Search by title..." />
       </div>
       <div class="wrapper-settings">
-        <button id="btn-show-favorites" @click="setFavoriteBtn()" v-bind:class="{active: show_favorites}">Show Favorites</button>
+        <button id="btn-show-favorites" @click="show_favorites ? show_favorites = true : show_favorites = false" v-bind:class="{
+          active: show_favorites
+        }">Show
+          Favorites</button>
       </div>
     </div>
     <div class="wrapper-songs">
@@ -77,7 +77,7 @@ export default {
             <IconCaretUp />
           </th>
         </tr>
-        <tr class="song" v-for="(song, index) in filtered_songs">
+        <tr class="song" v-for="(song, index) in filtered_songs" @dblclick="selectSong(song)">
           <td id="td-index">
             <IconPlay />
             <span id="txt-index">{{ index + 1 }}</span>
@@ -86,8 +86,8 @@ export default {
             <img :src="song.album.images[1].url" />
             {{ song.name }}
           </td>
-          <td id="td-artist">{{getArtists(song.artists)}}</td>
-          <td id="td-album">{{ song.album.name}}</td>
+          <td id="td-artist">{{ getArtists(song.artists) }}</td>
+          <td id="td-album">{{ song.album.name }}</td>
           <td id="td-duration">
             {{ getTime(song.duration_ms) }}
             <IconHeart />
