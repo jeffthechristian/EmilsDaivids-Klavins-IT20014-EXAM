@@ -2,16 +2,17 @@
 import songList from '../data/songs'
 import { player } from '../stores/player'
 import IconHeart from '../components/icons/IconHeart.vue'
+import { auth } from '/auth.js'
+
 export default {
   components: { IconHeart, },
   data() {
     return {
+      auth,
       player,
       search: '',
       show_favorites: false,
-      songs: songList,
-      active: true,
-      isFavorite: false,
+      songs: songList
     }
   },
   methods: {
@@ -42,7 +43,13 @@ export default {
   },
   computed: {
     filtered_songs() {
-      return this.songs;
+      let son = this.songs;
+      let x = [];
+      
+      x = son.filter((song) => {
+        return song.name.toLowerCase().includes(this.search.toLowerCase())
+      });
+      return x;
     },
   }
 }
@@ -90,7 +97,7 @@ export default {
           <td id="td-album">{{ song.album.name }}</td>
           <td id="td-duration">
             {{ getTime(song.duration_ms) }}
-            <IconHeart />
+            <IconHeart @click="auth.toggleFavorite(song.id)" v-bind:class="{active: auth.getFavoriteSongs().includes(song.id)}" />
           </td>
         </tr>
       </table>
